@@ -2,6 +2,12 @@ root {
   color: pink;
 }
 
+body {
+  background-image: url(../resources/img/bg/bg.png);
+  background-repeat: repeat;
+  background-position: center;
+}
+
 .fade-in {
   animation: fadeIn ease 10s;
   -webkit-animation: fadeIn ease 10s;
