@@ -3,9 +3,33 @@ root {
 }
 
 body {
-  background-image: url(../resources/img/bg/bg.png);
+  background-image: url(../resources/img/bg/flowers4.png);
   background-repeat: repeat;
   background-position: center;
+}
+
+.bg {
+  background-image: url(../resources/img/bg/flowers4.png);
+  background-repeat: repeat;
+  padding: 5% 10%;
+}
+
+.main {
+  background-color: white;
+  text-align: center;
+  padding: 5%;
+  border-radius: 2%;
+}
+
+.drawing {
+  max-height: 50em;
+  max-width: 50em;
+  padding: 1%;
+}
+
+.item {
+  height: 20em;
+  padding: 1%;
 }
 
 .fade-in {
