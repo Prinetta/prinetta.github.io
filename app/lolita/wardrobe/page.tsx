@@ -1,8 +1,14 @@
+"use client"
+
 import Image from 'next/image'
 import Link from 'next/link';
 import styles from './styles.module.css'
+import { useEffect } from 'react';
+import WardrobeOverview from './WardrobeOverview';
 
 export default function WardrobePage() {
+
+
   return <div className="bg">
     <div className="main">
       <h1>my lolita wardrobe ^__^ </h1>
@@ -11,40 +17,7 @@ export default function WardrobePage() {
 
       <br/>[note: maybe split heart for both sub styles, u can somehow combine the heart ? O__O]
 
-      <div className="flex justify-center space-x-10">
-        <Image
-          src="/images/lolita/dresses/1.png"
-          width={0}
-          height={0}
-          sizes="100vw"
-          alt=""
-          style={{ width: 'auto', height: '300px' }}
-        />
-       <Image
-          src="/images/lolita/dresses/2.png"
-          width={0}
-          height={0}
-          sizes="100vw"
-          alt=""
-          style={{ width: 'auto', height: '300px' }}
-        />
-        <Image
-          src="/images/lolita/dresses/3.png"
-          width={0}
-          height={0}
-          sizes="100vw"
-          alt=""
-          style={{ width: 'auto', height: '300px' }}
-        />
-        <Image
-          src="/images/lolita/dresses/4.png"
-          width={0}
-          height={0}
-          sizes="100vw"
-          alt=""
-          style={{ width: 'auto', height: '300px' }}
-        />
-      </div>                 
+      <WardrobeOverview/>              
       <br />
       <h1 className="title">OP</h1>
       <h1 className="title">Skirt</h1>
