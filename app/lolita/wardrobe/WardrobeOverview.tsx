@@ -1,53 +1,89 @@
-import { useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { getAllClothingItems } from "../../../database/database";
 import { Clothing, ClothingCategory } from "../types";
 import Image from 'next/image'
+import styles from './styles.module.css'
+import { Corinthia, Labrada } from "next/font/google";
 
-export default function WardrobeOverview(){
-  const [clothes, setClothes] = useState<Clothing[]>();
+const brandFont = Corinthia({
+  weight: ['700'],
+  subsets: ['latin'],
+})
 
-  useEffect(() => { getAllClothingItems().then(
+const brandFont2 = Labrada({
+  weight: ['500'],
+  style: ['italic'],
+  subsets: ['latin'],
+})
+
+export default function WardrobeOverview({ clothes, setClothes }: {clothes: Clothing[], setClothes: Dispatch<SetStateAction<Clothing[]>>}){
+  useEffect(() => { 
+    getAllClothingItems().then(
     clothingItems => {
-        if(clothingItems != null){
+        if(clothingItems != null){          
           setClothes(clothingItems)
-        } else {
-          /* show empty wardrobe page */
         }
       }
     )
   }, [])
+  
+  if(clothes != undefined && clothes[0] != undefined){
+    return <ClothingGrid category={ClothingCategory[clothes[0].category as keyof typeof ClothingCategory]}/>;
+  } else {
+    return <h1>no clothes here</h1>
+  }
 
-  return <WardrobeCategory category={ClothingCategory.JSK}/>;
-
-  function WardrobeCategory({category} : {category: ClothingCategory}){
+  function ClothingGrid({category} : {category: ClothingCategory}){
     if(clothes != undefined){
+      console.log(clothes)
+      console.log(ClothingCategory[category])
       let clothingByCategory = clothes.filter(item => item.category === ClothingCategory[category])
       return <div>
         <h1>{ClothingCategory[category]}</h1>
-        {clothingByCategory.map((item) => {
-          return ClothingInfo(item)
-        })} 
+        <div className="clothing-grid grid grid-cols-3 gap-3">
+          {clothingByCategory.map((item) => {
+            return ClothingInfo(item)
+          })} 
+        </div>
       </div>
     }
   }
   
   function ClothingInfo(item: Clothing){
     if(item.status === "Owned"){
-      return <div>
-        <div className="flex justify-center space-x-10">
+      return <div className="picture-frame-black clothing-card">
+          {/* <div className={styles["brand-bg"]}>
+            <p className={[styles["clothing-brand"], brandFont2.className].join(" ")}>{getBrandName(item.brand)}</p>
+          </div> */}
           <ItemImage 
             category={ClothingCategory[item.category as keyof typeof ClothingCategory]} 
             id={item.id}
-            />
-          <h2>{item.name}</h2>
-          {item.brand}<br/>
-          {item.colorway}<br/>
-          {item.note}<br/>
-          {item.lolibrary_link}<br/>    
+            />        
+          <p className={[styles["clothing-brand"], brandFont2.className].join(" ")}>{getBrandName(item.brand)}</p>
+          <h2 className={styles["clothing-name"]}>{item.name}</h2>        
+          <div className={styles.colorway}>{item.colorway}</div>
         </div>   
-      </div>
     } else {
       return <h1>lolita at heart</h1>
+    }
+  }
+
+  function getBrandName(brand: string){
+    switch(brand){
+      case "Baby":
+        return "Baby, the Stars Shine Bright"
+      case "AatP":
+        return "Alice and the Pirates"
+      case "Metamorphose":
+        return "Metamorphose Temps de Fille"
+      case "Moitie":
+        return "Moi-même-Moitié"
+      case "HNaoto":
+        return "H.NAOTO"
+      case "JetJ":
+        return "Juliette et Justine"
+      default:
+        return brand
     }
   }
 
@@ -77,6 +113,7 @@ export default function WardrobeOverview(){
       sizes="100vw"
       alt=""
       style={{ width: 'auto', height: '300px' }}
+      className={styles["clothing-image"]}
     />
   }
 }

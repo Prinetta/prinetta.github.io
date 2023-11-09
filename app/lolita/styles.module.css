@@ -1,4 +1,14 @@
-.error {
-  color: white;
-  background-color: red;
+.header {
+  font-size: 85px;
+  color: #000000;
+  text-decoration: underline;
+  text-decoration-color: #F7D6E7;
+  text-decoration-skip-ink: none;
+  text-decoration-thickness: 5px;
+  padding-top: 1.7%;
+}
+
+.header::after {
+  content: "♱";
+  font-family: arial;
 }

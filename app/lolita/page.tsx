@@ -21,7 +21,7 @@ export default function FirstPost1() {
 
         ~ a little bit about me ~<br/>
         styles: sweet & gothic<br/>
-        for sweet i immediatelly fell in love with the sugary overload OTT aesthetic of the 2010s. other than that i also love the cozy feeling of old school & kajurori very much!<br/><br/>
+        for sweet i immediately fell in love with the sugary overload OTT aesthetic of the 2010s. other than that i also love the cozy feeling of old school & kajurori very much!<br/><br/>
         favourite brands: <br/>
         baby the stars shine bright ✩ˎˊ˗<br/>
         the soft cotton, the sweet watercolor-style illustrations, the kumyas.... 
