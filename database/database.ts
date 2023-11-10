@@ -20,6 +20,7 @@ export async function getAllClothingItems() : Promise<Clothing[] | null> {
   const query = supabase.from(CLOTHING_TABLE).select();
   const clothingItems: Clothing[] | null  = (await query).data
 
+  console.log("accessing database")
   revalidatePath('/lolita/wardrobe')
 
   return clothingItems

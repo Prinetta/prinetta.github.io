@@ -16,32 +16,21 @@ const brandFont2 = Labrada({
   subsets: ['latin'],
 })
 
-export default function WardrobeOverview({ clothes, setClothes }: {clothes: Clothing[], setClothes: Dispatch<SetStateAction<Clothing[]>>}){
-  useEffect(() => { 
-    getAllClothingItems().then(
-    clothingItems => {
-        if(clothingItems != null){          
-          setClothes(clothingItems)
-        }
-      }
-    )
-  }, [])
+export default function ClothingGrid({ displayedClothes }: {
+  displayedClothes: Clothing[]
+}){  
   
-  if(clothes != undefined && clothes[0] != undefined){
-    return <ClothingGrid category={ClothingCategory[clothes[0].category as keyof typeof ClothingCategory]}/>;
+  if(displayedClothes != undefined && displayedClothes[0] != undefined){
+    return <Grid/>; 
   } else {
     return <h1>no clothes here</h1>
   }
 
-  function ClothingGrid({category} : {category: ClothingCategory}){
-    if(clothes != undefined){
-      console.log(clothes)
-      console.log(ClothingCategory[category])
-      let clothingByCategory = clothes.filter(item => item.category === ClothingCategory[category])
+  function Grid(){
+    if(displayedClothes != undefined){
       return <div>
-        <h1>{ClothingCategory[category]}</h1>
         <div className="clothing-grid grid grid-cols-3 gap-3">
-          {clothingByCategory.map((item) => {
+          {displayedClothes.map((item) => {
             return ClothingInfo(item)
           })} 
         </div>
@@ -87,7 +76,7 @@ export default function WardrobeOverview({ clothes, setClothes }: {clothes: Clot
     }
   }
 
-  type ItemImageProps = {
+  interface ItemImageProps {
     category: ClothingCategory,
     id: number
   }

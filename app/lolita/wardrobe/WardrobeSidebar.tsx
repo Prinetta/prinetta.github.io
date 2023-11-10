@@ -1,10 +1,12 @@
 import { Dispatch, SetStateAction, useEffect } from 'react'
 import { Clothing, ClothingCategory } from '../types'
 import styles from './styles.module.css'
-import { getAllClothingItems, getClothingItemsByCategory } from '../../../database/database'
-import { useRouter } from "next/navigation";
 
-export default function WardrobeSidebar({ clothes, setClothes }: {clothes: Clothing[], setClothes: Dispatch<SetStateAction<Clothing[]>>}){
+export default function WardrobeSidebar({ clothes, setCurrentCategory, setIsFiltered }: {
+  clothes: Clothing[], 
+  setCurrentCategory: Dispatch<SetStateAction<Clothing[]>>,
+  setIsFiltered: Dispatch<SetStateAction<boolean>>
+}){
   
   return <Sidebar/>
 
@@ -16,15 +18,9 @@ export default function WardrobeSidebar({ clothes, setClothes }: {clothes: Cloth
     </div>
   }
 
-  function setCurrentClothes(category: ClothingCategory) {
-    getClothingItemsByCategory(category).then(
-      clothingItems => {
-          if(clothingItems != null){            
-            setClothes(clothingItems)
-          } else {
-          }
-        }
-      )
+  function updateCategory(category: ClothingCategory) {
+    setCurrentCategory(clothes.filter((item: Clothing) => item.category === ClothingCategory[category]))  
+    setIsFiltered(false)
   }
 
   function CategoryButton({category} : { category: ClothingCategory }){
@@ -39,6 +35,6 @@ export default function WardrobeSidebar({ clothes, setClothes }: {clothes: Cloth
       case ClothingCategory.Accessory:
         categoryName = "Accessories"
     }
-    return <button onClick={() => setCurrentClothes(category)} className={styles["category-button"]}>{categoryName}</button>
+    return <button onClick={() => updateCategory(category)} className={styles["category-button"]}>{categoryName}</button>
   }
 }

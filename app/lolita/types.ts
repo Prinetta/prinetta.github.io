@@ -27,3 +27,20 @@ export enum ClothingCategory {
   Accessory,
   Outerwear
 }
+
+export enum ClothingSubstyle {
+  Sweet,
+  Gothic,
+  Oldschool,
+  OTT,
+  None
+}
+
+export enum Color {
+  Pink,
+  Sax,
+  Lavender,
+  Mint,
+  White,
+  Black
+}
