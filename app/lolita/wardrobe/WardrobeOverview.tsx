@@ -20,14 +20,14 @@ export default function ClothingGrid({ displayedClothes }: {
   displayedClothes: Clothing[]
 }){  
   
-  if(displayedClothes != undefined && displayedClothes[0] != undefined){
+  if(displayedClothes && displayedClothes[0] != undefined){
     return <Grid/>; 
   } else {
     return <h1>no clothes here</h1>
   }
 
   function Grid(){
-    if(displayedClothes != undefined){
+    if(displayedClothes){
       return <div>
         <div className="clothing-grid grid grid-cols-3 gap-3">
           {displayedClothes.map((item) => {

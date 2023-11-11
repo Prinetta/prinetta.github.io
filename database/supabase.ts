@@ -1,4 +1,10 @@
-import { PostgrestError } from '@supabase/supabase-js'
+import { PostgrestError } from "@supabase/supabase-js"
+
+export type Tables<T extends keyof Database['public']['Tables']> = Database['public']['Tables'][T]['Row']
+
+export type DbResult<T> = T extends PromiseLike<infer U> ? U : never
+export type DbResultOk<T> = T extends PromiseLike<{ data: infer U }> ? Exclude<U, null> : never
+export type DbResultErr = PostgrestError
 
 export type Json =
   | string
@@ -14,6 +20,7 @@ export interface Database {
       Clothing: {
         Row: {
           brand: string
+          category: string
           colorway: string | null
           id: number
           image: string | null
@@ -21,10 +28,10 @@ export interface Database {
           name: string
           note: string | null
           status: string
-          category: string
         }
         Insert: {
           brand: string
+          category: string
           colorway?: string | null
           id?: number
           image?: string | null
@@ -32,10 +39,10 @@ export interface Database {
           name: string
           note?: string | null
           status: string
-          category: string
         }
         Update: {
           brand?: string
+          category?: string
           colorway?: string | null
           id?: number
           image?: string | null
@@ -43,7 +50,6 @@ export interface Database {
           name?: string
           note?: string | null
           status?: string
-          category?: string
         }
         Relationships: []
       }
@@ -80,18 +86,18 @@ export interface Database {
       Tag: {
         Row: {
           id: number
-          Name: string
-          Type: string
+          name: string
+          type: string
         }
         Insert: {
           id?: number
-          Name: string
-          Type: string
+          name: string
+          type: string
         }
         Update: {
           id?: number
-          Name?: string
-          Type?: string
+          name?: string
+          type?: string
         }
         Relationships: []
       }
@@ -110,9 +116,3 @@ export interface Database {
     }
   }
 }
-
-export type Tables<T extends keyof Database['public']['Tables']> = Database['public']['Tables'][T]['Row']
-
-export type DbResult<T> = T extends PromiseLike<infer U> ? U : never
-export type DbResultOk<T> = T extends PromiseLike<{ data: infer U }> ? Exclude<U, null> : never
-export type DbResultErr = PostgrestError

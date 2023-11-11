@@ -10,6 +10,17 @@ export interface Clothing {
   category: string
 }
 
+export interface Clothing_Tag {
+  clothing_id: number
+  tag_id: number
+}
+
+export interface Tag {
+  id: number
+  name: string
+  type: string
+}
+
 export enum ClothingCategory {
   JSK,
   OP,
@@ -26,14 +37,6 @@ export enum ClothingCategory {
   Bag,
   Accessory,
   Outerwear
-}
-
-export enum ClothingSubstyle {
-  Sweet,
-  Gothic,
-  Oldschool,
-  OTT,
-  None
 }
 
 export enum Color {

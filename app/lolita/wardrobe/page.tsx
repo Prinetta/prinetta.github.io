@@ -8,9 +8,9 @@ import { Corinthia, Rouge_Script } from 'next/font/google'
 import localFont from 'next/font/local'
 import WardrobeSidebar from './WardrobeSidebar';
 import { useEffect, useState } from 'react';
-import { Clothing, ClothingCategory } from '../types';
+import { Clothing, ClothingCategory, Clothing_Tag } from '../types';
 import { getAllClothingItems } from '../../../database/database';
-import FilterBar from './FilterBar';
+import FilterBar from './Filter';
  
 const titleFont = Rouge_Script({
   weight: ['400'],
@@ -38,9 +38,11 @@ export default function WardrobePage() {
     if(!fetchedClothes || fetchedClothes.length == 0){
       getAllClothingItems().then(
         clothes => {
-          if(clothes != null){          
+          if(clothes){          
             setClothes(clothes)
-            setDisplayedClothes(clothes.filter((item: Clothing) => item.category === ClothingCategory[ClothingCategory.JSK]))
+            const defaultFilter = clothes.filter((item: Clothing) => item.category === ClothingCategory[ClothingCategory.JSK])
+            setCurrentCategory(defaultFilter)
+            setDisplayedClothes(defaultFilter)
           }
         }
       )
@@ -58,8 +60,8 @@ export default function WardrobePage() {
         </p>
 
         <FilterBar 
-          displayedClothes={displayedClothes} 
           currentCategoryClothes={currentCategoryClothes} 
+          displayedClothes={displayedClothes}
           setDisplayedClothes={setDisplayedClothes} 
           isFiltered={isFiltered} 
           setIsFiltered={setIsFiltered}/>
