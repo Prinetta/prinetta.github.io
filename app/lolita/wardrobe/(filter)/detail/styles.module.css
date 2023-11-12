@@ -1,0 +1,49 @@
+.scroll-box { /* haha u can't actually scroll in it */
+  background-image: url(/images/layout/objects/scroll.png);
+  background-repeat: no-repeat;  
+  background-position: center;
+  background-size: cover;
+  padding: 5%;
+  margin: 5% 0% 5% 18%;
+  width: 35%;
+}
+
+.item-frame {
+  background-image: url(/images/layout/frame/square.png);
+  background-repeat: no-repeat;  
+  background-position: center;
+  background-size: contain;
+  padding: 5% ;
+  height: max-content;
+  position: relative;
+  margin: 10% 0%;
+}
+
+.item-frame::before {
+  content: url(/images/layout/graphics/angel.png);
+  position: absolute;
+  top: -35%;
+  left: 45%;
+  z-index: -2;
+}
+
+.frame-background {
+  background-color: white;
+  position: absolute;
+  width: 100%;
+  top: 1em;
+  left: 3em;
+  max-width: 70%;
+  min-height: 90%;
+  z-index: -1;
+}
+
+.cross {
+  position: absolute;
+  top: 25%;
+  left: 6%;
+}
+
+.item-details {
+
+}

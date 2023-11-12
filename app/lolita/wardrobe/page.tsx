@@ -1,16 +1,16 @@
 "use client"
 
 import Link from 'next/link';
-import ClothingGrid from './WardrobeOverview';
+import ClothingGrid from './ClothingGrid';
 import styles from '../styles.module.css'
 import wardrobeStyles from './styles.module.css'
 import { Corinthia, Rouge_Script } from 'next/font/google'
 import localFont from 'next/font/local'
-import WardrobeSidebar from './WardrobeSidebar';
-import { useEffect, useState } from 'react';
+import WardrobeSidebar from './(sidebar)/WardrobeSidebar';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Clothing, ClothingCategory, Clothing_Tag } from '../types';
 import { getAllClothingItems } from '../../../database/database';
-import FilterBar from './Filter';
+import FilterBar from './(filter)/Filter';
  
 const titleFont = Rouge_Script({
   weight: ['400'],
@@ -29,7 +29,7 @@ const myFont = localFont({
 export default function WardrobePage() {
   
   const [fetchedClothes, setClothes] = useState<Clothing[]>([]);  
-  const [currentCategoryClothes, setCurrentCategory] = useState<Clothing[]>([]);
+  const [currentCategoryClothes, setCategoryClothes] = useState<Clothing[]>([]);
   const [displayedClothes, setDisplayedClothes] = useState<Clothing[]>([]);
   
   const [isFiltered, setIsFiltered] = useState<boolean>(false);  
@@ -41,7 +41,7 @@ export default function WardrobePage() {
           if(clothes){          
             setClothes(clothes)
             const defaultFilter = clothes.filter((item: Clothing) => item.category === ClothingCategory[ClothingCategory.JSK])
-            setCurrentCategory(defaultFilter)
+            setCategoryClothes(defaultFilter)
             setDisplayedClothes(defaultFilter)
           }
         }
@@ -50,6 +50,8 @@ export default function WardrobePage() {
   }, [])
   
   return <div className="bg">
+    <div className={wardrobeStyles["character-left"]}></div>
+    <div className={wardrobeStyles["character-right"]}></div>
     <div className='picture-frame'>
       <div className="main white-lace-border">
         <h1 className={[styles.header, titleFont.className].join(" ")}>My Lolita Wardrobe</h1>
@@ -61,12 +63,15 @@ export default function WardrobePage() {
 
         <FilterBar 
           currentCategoryClothes={currentCategoryClothes} 
-          displayedClothes={displayedClothes}
           setDisplayedClothes={setDisplayedClothes} 
           isFiltered={isFiltered} 
           setIsFiltered={setIsFiltered}/>
 
-        <WardrobeOverview/>
+        <WardrobeOverview 
+          fetchedClothes={fetchedClothes} 
+          setCategoryClothes={setCategoryClothes} 
+          setIsFiltered={setIsFiltered} 
+          displayedClothes={displayedClothes}/>        
 
         <br/><br/><br/>
         <a href="coords">pictures</a>
@@ -77,14 +82,19 @@ export default function WardrobePage() {
       </div>
     </div>
   </div>
+}
 
-  function WardrobeOverview(){
-    return <div className='flex flex-row'>
+function WardrobeOverview({ fetchedClothes, setCategoryClothes, setIsFiltered, displayedClothes }: {
+  fetchedClothes: Clothing[], 
+  setCategoryClothes: Dispatch<SetStateAction<Clothing[]>>,
+  setIsFiltered: Dispatch<SetStateAction<boolean>>,
+  displayedClothes: Clothing[]
+}){
+  return <div className='flex flex-row'>
     <WardrobeSidebar 
-      clothes={fetchedClothes} 
-      setCurrentCategory={setCurrentCategory}
-      setIsFiltered={setIsFiltered}/>
+        clothes={fetchedClothes} 
+        setCategoryClothes={setCategoryClothes}
+        setIsFiltered={setIsFiltered}/>
     <ClothingGrid displayedClothes={displayedClothes}/>      
   </div>
-  }
 }

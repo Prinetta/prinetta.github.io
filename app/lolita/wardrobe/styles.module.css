@@ -6,6 +6,11 @@
 
 }
 
+.clothing-grid {
+  padding: 0% 3%;
+  background-color: var(--light-pink);
+}
+
 .description {
   color:  var(--light-pink);
   font-weight: 600;
@@ -13,15 +18,6 @@
   text-align: left;
   font-size: 18px;
 }
-
-.filter {
-  min-height: 3%;
-  height: 4%;
-  width: 100%;
-  margin-top: 2.5%;
-  background-color: var(--light-pink)
-}
-
 .clothing-card {
   background: white;
   /* background-image: url(/images/layout/gifs/banners/frame.png); */
@@ -63,6 +59,27 @@
   font-size: 15px;
 }
 
-.category-button {
-  
+.character-left {
+  position: absolute;
+  background-image: url(/images/layout/graphics/sweet-lolita.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  min-height: 1000px;
+  min-width: 25%;
+  top: 8%;
+  left: 0;
+  z-index: -1;
+}
+
+
+.character-right {
+  position: absolute;
+  background-image: url(/images/layout/graphics/sweet-lolita-black.png);
+  background-repeat: no-repeat;
+  background-size: contain;
+  min-height: 1000px;
+  min-width: 25%;
+  top: 30%;
+  right: 0;
+  z-index: -1;
 }
