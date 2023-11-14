@@ -1,6 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react'
-import { Clothing, Clothing_Tag, Tag } from '../../types'
-import { getAllClothingItems, getAllTags, getAllTagsOfType } from '../../../../database/database'
+import { useState } from 'react'
 import styles from './styles.module.css'
 
 export default function SubstyleFilter({text, substyle, applySubstyleFilter} : 
@@ -12,7 +10,6 @@ export default function SubstyleFilter({text, substyle, applySubstyleFilter} :
 
   function onClick(){
     setIsSelected(!isSelected)
-    console.log(substyle + " is " + isSelected)  
     applySubstyleFilter(substyle)
   }
 }

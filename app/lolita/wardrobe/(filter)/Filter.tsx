@@ -9,7 +9,6 @@ export default function FilterBar({ isFiltered, setIsFiltered }: {
   isFiltered: boolean,
   setIsFiltered: Dispatch<SetStateAction<boolean>>,
 }){  
-
   const {currentCategoryClothes, setDisplayedClothes} = useClothingContext()
 
   const [selectedSubstyles, setSubstyleFilter] = useState<number[]>([])
@@ -19,6 +18,7 @@ export default function FilterBar({ isFiltered, setIsFiltered }: {
   const [clothesStyleTags, setClothesStyleTags] = useState<Clothing_Tag[]>([]);  
 
   useEffect(() => { 
+    console.log(currentCategoryClothes)
     getAllTags().then(tag => {
       if(tag){
         setTags(tag)

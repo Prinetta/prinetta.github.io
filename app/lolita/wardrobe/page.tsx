@@ -20,14 +20,14 @@ const titleFont = Rouge_Script({
 
 const myFont = localFont({ 
   src: [{
-    path: './josephsophia.otf',
+    path: '../../../public/fonts/josephsophia.otf',
     weight: '200',
     style: 'normal'
   }]
 })
 
 export default function WardrobePage() {
-  const [isFiltered, setIsFiltered] = useState<boolean>(false);  
+  const [isFiltered, setIsFiltered] = useState<boolean>(true);  
   
   return <div className="bg">
     <div className={wardrobeStyles["character-left"]}></div>
@@ -58,9 +58,8 @@ export default function WardrobePage() {
 }
 
 function WardrobeOverview({setIsFiltered}: {setIsFiltered: Dispatch<SetStateAction<boolean>>}){
-  const {displayedClothes} = useClothingContext()
   return <div className='flex flex-row'>
     <WardrobeSidebar setIsFiltered={setIsFiltered}/>
-    <ClothingGrid displayedClothes={displayedClothes}/>      
+    <ClothingGrid/>      
   </div>
 }

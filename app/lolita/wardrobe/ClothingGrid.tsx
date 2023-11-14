@@ -7,6 +7,7 @@ import { Corinthia, Labrada } from "next/font/google";
 import FullWidthImage from "../../components/FullWidthImage";
 import Link from "next/link";
 import React from "react";
+import { useClothingContext } from "../ClothingContext";
 
 const brandFont = Corinthia({
   weight: ['700'],
@@ -19,9 +20,8 @@ const brandFont2 = Labrada({
   subsets: ['latin'],
 })
 
-export default function ClothingGrid({ displayedClothes }: {
-  displayedClothes: Clothing[]
-}){  
+export default function ClothingGrid(){  
+  const {displayedClothes} = useClothingContext()
   
   if(displayedClothes && displayedClothes[0] != undefined){
     return <Grid/>; 
@@ -31,14 +31,33 @@ export default function ClothingGrid({ displayedClothes }: {
 
   function Grid(){
     if(displayedClothes){
+      const elements = []      
+      const crosses = displayedClothes.length / 3 * 2
+      let crossCount = 0
+      for (let index = 0; index < displayedClothes.length + crosses; index++) {
+        if(index % 5 === 1 || index % 5 === 3){
+          elements.push(<FullWidthImage src="/images/layout/objects/cross.png" style="" height={"200px"}/>)
+          crossCount++
+        } else {
+          const item = displayedClothes[index - crossCount];
+          elements.push(<Link href={`/lolita/wardrobe/details?id=${item.id}`} key={index}>
+            {ClothingInfo(item)}
+          </Link>)
+        }        
+      }
       return <div>
-        <div className={`${styles["clothing-grid"]} flex-none grid grid-cols-3 gap-3`}>
+        <div className={`${styles["clothing-grid"]} grid grid-cols-5 gap-2`}>
+          {elements.map((element, index) => {
+            return element
+          })} 
+        </div>
+        {/* <div className={`${styles["clothing-grid"]} grid grid-cols-3 gap-3`}>
           {displayedClothes.map((item, index) => {
             return <Link href={`/lolita/wardrobe/details?id=${item.id}`} key={index}>
               {ClothingInfo(item)}
             </Link>
           })} 
-        </div>
+        </div> */}
       </div>
     }
   }
@@ -46,17 +65,13 @@ export default function ClothingGrid({ displayedClothes }: {
 
   function ClothingInfo(item: Clothing){
     if(item.status === "Owned" || item.status === "Ordered"){
-      return <div className="picture-frame-black clothing-card">
-            {/* <div className={styles["brand-bg"]}>
-              <p className={[styles["clothing-brand"], brandFont2.className].join(" ")}>{getBrandName(item.brand)}</p>
-            </div> */}
+      return <div className={`heart-border ${styles["clothing-card"]} flex flex-col items-center`}>
             <ItemImage 
               category={ClothingCategory[item.category as keyof typeof ClothingCategory]} 
               id={item.id}
               />        
             <p className={[styles["clothing-brand"], brandFont2.className].join(" ")}>{getBrandName(item.brand)}</p>
             <h2 className={styles["clothing-name"]}>{item.name}</h2>        
-            <div className={styles.colorway}>{item.colorway}</div>
           </div>   
     }
   }
@@ -99,7 +114,7 @@ export default function ClothingGrid({ displayedClothes }: {
     }
     const path = `/images/lolita/${folder}/${id}.png`
 
-    return <FullWidthImage src={path} style={styles["clothing-image"]} height={'300px'}/>
+    return <FullWidthImage src={path} style={styles["clothing-image"]} height={'13em'}/>
   }
 }
 

@@ -1,27 +1,34 @@
 'use client'
 
-import FullWidthImage from '../../../../components/FullWidthImage'
+import Link from 'next/link'
+import FullWidthImage from '../../../components/FullWidthImage'
 import ItemDetails from './ItemDetails'
 import styles from './styles.module.css'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useEffect } from 'react'
+import ClothingContextProvider, { useClothingContext } from '../../ClothingContext'
 
 export default function PageOverview(){
-  return <div 
-  className='flex flex-row'>
-    <FullWidthImage src="/images/layout/objects/cross.png" style={styles["cross"]} height={'200px'}/>
-    <div className={styles["scroll-box"]}>
-      <LongText/>
-      <ItemDetails/>
-    </div>
-    <div className={styles["item-frame"]}>
-        <div className={styles["frame-background"]}/>
-        <FullWidthImage src="/images/lolita/dresses/1.png" style={"item-details"} height={'300px'}/>
+  const idParam = useSearchParams().get('id')
+  const id = +(idParam ? idParam : -1)
+
+  return <ClothingContextProvider>
+    <div 
+      className='flex flex-row'>
+      <FullWidthImage src="/images/layout/objects/cross.png" style={styles["cross"]} height={'200px'}/>
+      <div className={styles["scroll-box"]}>
+        <ItemDetails id={id}/>
       </div>
-    <div>
+      <div className={styles["item-frame"]}>
+          <div className={styles["frame-background"]}/>
+          <FullWidthImage src={`/images/lolita/dresses/${id}.png`} style={"item-details"} height={'300px'}/>
+        </div>
+      <div>
 
-      <button>back to wardrobe</button>
+        <Link href={"/lolita/wardrobe"}>back to wardrobe</Link>
+      </div>
     </div>
-
-  </div>
+  </ClothingContextProvider>
 }
 
 function LongText(){  

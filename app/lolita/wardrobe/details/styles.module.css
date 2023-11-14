@@ -47,3 +47,15 @@
 .item-details {
 
 }
+
+.item-property {
+  font-weight: 600;
+}
+
+.title {
+  font-size: 90px;
+  font-family: Ancient;
+  font-weight: 100;
+  color: black;
+}
+
