@@ -1,4 +1,7 @@
+'use client'
+
 import FullWidthImage from '../../../../components/FullWidthImage'
+import ItemDetails from './ItemDetails'
 import styles from './styles.module.css'
 
 export default function PageOverview(){
@@ -7,6 +10,7 @@ export default function PageOverview(){
     <FullWidthImage src="/images/layout/objects/cross.png" style={styles["cross"]} height={'200px'}/>
     <div className={styles["scroll-box"]}>
       <LongText/>
+      <ItemDetails/>
     </div>
     <div className={styles["item-frame"]}>
         <div className={styles["frame-background"]}/>

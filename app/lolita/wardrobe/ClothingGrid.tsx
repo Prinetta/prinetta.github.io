@@ -1,10 +1,12 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, createContext, useEffect, useState } from "react";
 import { getAllClothingItems } from "../../../database/database";
 import { Clothing, ClothingCategory } from "../types";
 import Image from 'next/image'
 import styles from './styles.module.css'
 import { Corinthia, Labrada } from "next/font/google";
 import FullWidthImage from "../../components/FullWidthImage";
+import Link from "next/link";
+import React from "react";
 
 const brandFont = Corinthia({
   weight: ['700'],
@@ -31,28 +33,31 @@ export default function ClothingGrid({ displayedClothes }: {
     if(displayedClothes){
       return <div>
         <div className={`${styles["clothing-grid"]} flex-none grid grid-cols-3 gap-3`}>
-          {displayedClothes.map((item) => {
-            return ClothingInfo(item)
+          {displayedClothes.map((item, index) => {
+            return <Link href={`/lolita/wardrobe/details?id=${item.id}`} key={index}>
+              {ClothingInfo(item)}
+            </Link>
           })} 
         </div>
       </div>
     }
   }
   
+
   function ClothingInfo(item: Clothing){
     if(item.status === "Owned" || item.status === "Ordered"){
       return <div className="picture-frame-black clothing-card">
-          {/* <div className={styles["brand-bg"]}>
+            {/* <div className={styles["brand-bg"]}>
+              <p className={[styles["clothing-brand"], brandFont2.className].join(" ")}>{getBrandName(item.brand)}</p>
+            </div> */}
+            <ItemImage 
+              category={ClothingCategory[item.category as keyof typeof ClothingCategory]} 
+              id={item.id}
+              />        
             <p className={[styles["clothing-brand"], brandFont2.className].join(" ")}>{getBrandName(item.brand)}</p>
-          </div> */}
-          <ItemImage 
-            category={ClothingCategory[item.category as keyof typeof ClothingCategory]} 
-            id={item.id}
-            />        
-          <p className={[styles["clothing-brand"], brandFont2.className].join(" ")}>{getBrandName(item.brand)}</p>
-          <h2 className={styles["clothing-name"]}>{item.name}</h2>        
-          <div className={styles.colorway}>{item.colorway}</div>
-        </div>   
+            <h2 className={styles["clothing-name"]}>{item.name}</h2>        
+            <div className={styles.colorway}>{item.colorway}</div>
+          </div>   
     }
   }
 
