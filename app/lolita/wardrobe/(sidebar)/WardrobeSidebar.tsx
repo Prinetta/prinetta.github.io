@@ -2,13 +2,13 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react'
 import { Clothing, ClothingCategory } from '../../types'
 import styles from './styles.module.css'
 import FullWidthImage from '../../../components/FullWidthImage';
+import { useClothingContext } from '../../ClothingContext';
 
-export default function WardrobeSidebar({ clothes, setCategoryClothes, setIsFiltered }: {
-  clothes: Clothing[], 
-  setCategoryClothes: Dispatch<SetStateAction<Clothing[]>>,
+export default function WardrobeSidebar({ setIsFiltered }: {
   setIsFiltered: Dispatch<SetStateAction<boolean>>
 }){
-  const [activeCategory, setActiveCategory] = useState<ClothingCategory>(0);
+  const {clothes, setCategoryClothes} = useClothingContext()
+  const [activeCategory, setActiveCategory] = useState<ClothingCategory>(0);  
 
   useEffect(() => {
     console.log(activeCategory)

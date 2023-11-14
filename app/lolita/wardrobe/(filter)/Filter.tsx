@@ -3,13 +3,14 @@ import { Clothing, Clothing_Tag, Tag } from '../../types'
 import styles from './styles.module.css'
 import { getAllClothingItems, getAllTags, getAllTagsOfType } from '../../../../database/database'
 import SubstyleFilter from './SubstyleFilter'
+import { useClothingContext } from '../../ClothingContext'
 
-export default function FilterBar({ currentCategoryClothes, setDisplayedClothes, isFiltered, setIsFiltered }: {
-  currentCategoryClothes: Clothing[],
-  setDisplayedClothes: Dispatch<SetStateAction<Clothing[]>>,
+export default function FilterBar({ isFiltered, setIsFiltered }: {
   isFiltered: boolean,
   setIsFiltered: Dispatch<SetStateAction<boolean>>,
 }){  
+
+  const {currentCategoryClothes, setDisplayedClothes} = useClothingContext()
 
   const [selectedSubstyles, setSubstyleFilter] = useState<number[]>([])
   const [brandFilter, setBrandFilter] = useState<string[]>([])
@@ -47,7 +48,6 @@ export default function FilterBar({ currentCategoryClothes, setDisplayedClothes,
   </div>
 
   function applySubstyleFilter(substyle: number | undefined){
-    console.log("applying the filter ?")
     if(selectedSubstyles && substyle){
       if(selectedSubstyles.includes(substyle)){
         setSubstyleFilter(selectedSubstyles.filter(style => substyle !== style)) // removes from filter

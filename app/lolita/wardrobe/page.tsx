@@ -11,6 +11,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { Clothing, ClothingCategory, Clothing_Tag } from '../types';
 import { getAllClothingItems } from '../../../database/database';
 import FilterBar from './(filter)/Filter';
+import ClothingContext, { useClothingContext } from '../ClothingContext';
  
 const titleFont = Rouge_Script({
   weight: ['400'],
@@ -25,29 +26,8 @@ const myFont = localFont({
   }]
 })
 
-
 export default function WardrobePage() {
-  
-  const [fetchedClothes, setClothes] = useState<Clothing[]>([]);  
-  const [currentCategoryClothes, setCategoryClothes] = useState<Clothing[]>([]);
-  const [displayedClothes, setDisplayedClothes] = useState<Clothing[]>([]);
-  
   const [isFiltered, setIsFiltered] = useState<boolean>(false);  
-
-  useEffect(() => { 
-    if(!fetchedClothes || fetchedClothes.length == 0){
-      getAllClothingItems().then(
-        clothes => {
-          if(clothes){          
-            setClothes(clothes)
-            const defaultFilter = clothes.filter((item: Clothing) => item.category === ClothingCategory[ClothingCategory.JSK])
-            setCategoryClothes(defaultFilter)
-            setDisplayedClothes(defaultFilter)
-          }
-        }
-      )
-    }
-  }, [])
   
   return <div className="bg">
     <div className={wardrobeStyles["character-left"]}></div>
@@ -61,17 +41,10 @@ export default function WardrobePage() {
           there is a switch in the corner that lets you toggle between my sweet and gothic wardrobe ! if you just want to see all, then check the dedicated checkbox right below!
         </p>
 
-        <FilterBar 
-          currentCategoryClothes={currentCategoryClothes} 
-          setDisplayedClothes={setDisplayedClothes} 
-          isFiltered={isFiltered} 
-          setIsFiltered={setIsFiltered}/>
-
-        <WardrobeOverview 
-          fetchedClothes={fetchedClothes} 
-          setCategoryClothes={setCategoryClothes} 
-          setIsFiltered={setIsFiltered} 
-          displayedClothes={displayedClothes}/>        
+        <ClothingContext>
+          <FilterBar isFiltered={isFiltered} setIsFiltered={setIsFiltered}/>
+          <WardrobeOverview setIsFiltered={setIsFiltered} />  
+        </ClothingContext>      
 
         <br/><br/><br/>
         <a href="coords">pictures</a>
@@ -79,22 +52,15 @@ export default function WardrobePage() {
         <a href="dressup">lolita dress up :3</a>
         <br/><br/>
         <Link href="/">home</Link>
+        </div>
       </div>
     </div>
-  </div>
 }
 
-function WardrobeOverview({ fetchedClothes, setCategoryClothes, setIsFiltered, displayedClothes }: {
-  fetchedClothes: Clothing[], 
-  setCategoryClothes: Dispatch<SetStateAction<Clothing[]>>,
-  setIsFiltered: Dispatch<SetStateAction<boolean>>,
-  displayedClothes: Clothing[]
-}){
+function WardrobeOverview({setIsFiltered}: {setIsFiltered: Dispatch<SetStateAction<boolean>>}){
+  const {displayedClothes} = useClothingContext()
   return <div className='flex flex-row'>
-    <WardrobeSidebar 
-        clothes={fetchedClothes} 
-        setCategoryClothes={setCategoryClothes}
-        setIsFiltered={setIsFiltered}/>
+    <WardrobeSidebar setIsFiltered={setIsFiltered}/>
     <ClothingGrid displayedClothes={displayedClothes}/>      
   </div>
 }

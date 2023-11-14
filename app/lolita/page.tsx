@@ -1,6 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
-import styles from './styles.module.css'
 import type { Metadata } from 'next'
  
 export const metadata: Metadata = {
@@ -8,6 +6,7 @@ export const metadata: Metadata = {
 }
 
 export default function FirstPost1() {
+
   return <>
     <div className="bg">
       <div className="main">

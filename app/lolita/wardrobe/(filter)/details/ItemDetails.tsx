@@ -8,7 +8,5 @@ import { useSearchParams } from 'next/navigation'
 export default function ItemDetails(){
   const searchParams = useSearchParams()
   console.log(searchParams.get('id')) // Logs "search"
-  console.log()
-
   return <div className=""></div>
 }
