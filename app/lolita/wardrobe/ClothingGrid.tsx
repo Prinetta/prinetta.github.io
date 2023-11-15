@@ -36,7 +36,10 @@ export default function ClothingGrid(){
       let crossCount = 0
       for (let index = 0; index < displayedClothes.length + crosses; index++) {
         if(index % 5 === 1 || index % 5 === 3){
-          elements.push(<FullWidthImage src="/images/layout/objects/cross.png" style="" height={"200px"}/>)
+          elements.push(<div className="flex flex-col" style={{marginLeft: "0.3em"}}>
+            <FullWidthImage src="/images/layout/objects/cross.png" style="cross" height={"5em"}/>
+            <div style={{height:"2em", width:"100%", clear:"both"}}/> {/* cross shouldn't be dead center*/}
+          </div>)
           crossCount++
         } else {
           const item = displayedClothes[index - crossCount];
@@ -45,19 +48,12 @@ export default function ClothingGrid(){
           </Link>)
         }        
       }
-      return <div>
-        <div className={`${styles["clothing-grid"]} grid grid-cols-5 gap-2`}>
+      return <div className={styles["grid-container"]}>
+        <div className={`${styles["clothing-grid"]}`}>
           {elements.map((element, index) => {
             return element
           })} 
         </div>
-        {/* <div className={`${styles["clothing-grid"]} grid grid-cols-3 gap-3`}>
-          {displayedClothes.map((item, index) => {
-            return <Link href={`/lolita/wardrobe/details?id=${item.id}`} key={index}>
-              {ClothingInfo(item)}
-            </Link>
-          })} 
-        </div> */}
       </div>
     }
   }
@@ -65,14 +61,19 @@ export default function ClothingGrid(){
 
   function ClothingInfo(item: Clothing){
     if(item.status === "Owned" || item.status === "Ordered"){
-      return <div className={`heart-border ${styles["clothing-card"]} flex flex-col items-center`}>
-            <ItemImage 
-              category={ClothingCategory[item.category as keyof typeof ClothingCategory]} 
-              id={item.id}
-              />        
-            <p className={[styles["clothing-brand"], brandFont2.className].join(" ")}>{getBrandName(item.brand)}</p>
-            <h2 className={styles["clothing-name"]}>{item.name}</h2>        
-          </div>   
+      return <div className={`heart-border ${styles["clothing-card"]}`}>
+        <ItemImage 
+          category={ClothingCategory[item.category as keyof typeof ClothingCategory]} 
+          id={item.id}
+          />        
+        <p className={[styles["clothing-brand"], brandFont2.className].join(" ")}>{getBrandName(item.brand)}</p>
+          {item.name.length < 29 ? (
+            <h2 className={styles["clothing-name"]}>{item.name}</h2>      
+          ) : (
+            <h2 className={styles["clothing-name-small"]} style={{ fontSize: (19.5-item.name.length/29*2.75)+"px" }}>{item.name}</h2>      
+          )          
+        }
+      </div>   
     }
   }
 
@@ -113,6 +114,7 @@ export default function ClothingGrid(){
         break
     }
     const path = `/images/lolita/${folder}/${id}.png`
+
 
     return <FullWidthImage src={path} style={styles["clothing-image"]} height={'13em'}/>
   }

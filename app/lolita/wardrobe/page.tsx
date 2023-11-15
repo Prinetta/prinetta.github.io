@@ -12,6 +12,7 @@ import { Clothing, ClothingCategory, Clothing_Tag } from '../types';
 import { getAllClothingItems } from '../../../database/database';
 import FilterBar from './(filter)/Filter';
 import ClothingContext, { useClothingContext } from '../ClothingContext';
+import FullWidthImage from '../../components/FullWidthImage';
  
 const titleFont = Rouge_Script({
   weight: ['400'],
@@ -30,6 +31,8 @@ export default function WardrobePage() {
   const [isFiltered, setIsFiltered] = useState<boolean>(true);  
   
   return <div className="bg">
+    <FullWidthImage src="/images/layout/objects/heart-wings-glow.png" style={wardrobeStyles["bg-heart"]} height='6em'/>
+    <FullWidthImage src="/images/layout/objects/cross-white.png" style={wardrobeStyles["bg-cross"]} height='11em'/>
     <div className={wardrobeStyles["character-left"]}></div>
     <div className={wardrobeStyles["character-right"]}></div>
     <div className='picture-frame'>
