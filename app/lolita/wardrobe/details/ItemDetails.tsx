@@ -1,9 +1,3 @@
-import { LinkProps } from "next/link"
-import type { InferGetServerSidePropsType, GetServerSideProps } from 'next'
-import { useEffect } from "react"
-import { Clothing } from "../../types"
-
-import { useSearchParams } from 'next/navigation'
 import localFont from "next/font/local"
 import { useClothingContext } from "../../ClothingContext"
 import styles from "./styles.module.css"
