@@ -8,6 +8,7 @@ import FullWidthImage from "../../components/FullWidthImage";
 import Link from "next/link";
 import React from "react";
 import { useClothingContext } from "../ClothingContext";
+import { getBrandName, getCategoryName, getImagePath } from "./helperFunctions";
 
 const brandFont = Corinthia({
   weight: ['700'],
@@ -77,60 +78,13 @@ export default function ClothingGrid(){
     }
   }
 
-  function getBrandName(brand: string){
-    switch(brand){
-      case "Baby":
-        return "Baby, the Stars Shine Bright"
-      case "AatP":
-        return "Alice and the Pirates"
-      case "Metamorphose":
-        return "Metamorphose Temps de Fille"
-      case "Moitie":
-        return "Moi-même-Moitié"
-      case "HNaoto":
-        return "H.NAOTO"
-      case "JetJ":
-        return "Juliette et Justine"
-      default:
-        return brand
-    }
-  }
-
   interface ItemImageProps {
     category: ClothingCategory,
     id: number
   }
 
   function ItemImage({ category, id }: ItemImageProps){
-    let folder = getCategoryName(category)
-    switch(category){
-      case ClothingCategory.JSK:
-      case ClothingCategory.OP:
-        folder = "dresses"
-        break
-      case ClothingCategory.Bolero:
-      case ClothingCategory.Cardigan:
-        folder = "layers"
-        break
-    }
-    const path = `/images/lolita/${folder}/${id}.png`
-
-
-    return <FullWidthImage src={path} style={styles["clothing-image"]} height={'13em'}/>
-  }
-}
-
-function getCategoryName(category: ClothingCategory): string{
-  switch(category){
-    case ClothingCategory.Wristcuffs:
-    case ClothingCategory.Legwear:
-    case ClothingCategory.Shoes:
-    case ClothingCategory.Outerwear:
-      return ClothingCategory[category]     
-    case ClothingCategory.Accessory:
-      return "Accessories"
-    default:
-      return ClothingCategory[category] + 's'
+    return <FullWidthImage src={getImagePath(category, id)} style={styles["clothing-image"]} height={'13em'}/>
   }
 }
 

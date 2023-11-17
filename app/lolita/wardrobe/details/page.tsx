@@ -13,21 +13,17 @@ export default function PageOverview(){
   const id = +(idParam ? idParam : -1)
 
   return <ClothingContextProvider>
-    <div 
-      className='flex flex-row'>
-      <FullWidthImage src="/images/layout/objects/cross.png" style={styles["cross"]} height={'200px'}/>
+    <FullWidthImage src="/images/layout/objects/cross.png" style={styles["cross"]} height={'200px'}/>
+    <div className={styles["first-row-container"]}>
       <div className={styles["scroll-box"]}>
         <ItemDetails id={id}/>
       </div>
-      <div className={styles["item-frame"]}>
-          <div className={styles["frame-background"]}/>
-          <FullWidthImage src={`/images/lolita/dresses/${id}.png`} style={"item-details"} height={'300px'}/>
-        </div>
-      <div>
-
-        <Link href={"/lolita/wardrobe"}>back to wardrobe</Link>
+      <div className={styles["picture-frame"]}>
+        <div className={styles["frame-background"]}/>
+          <FullWidthImage src={`/images/lolita/dresses/${id}.png`} style={styles["item-image"]} height={'300px'}/>
       </div>
     </div>
+    <Link href={"/lolita/wardrobe"}>back to wardrobe</Link>
   </ClothingContextProvider>
 }
 

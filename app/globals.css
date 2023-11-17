@@ -2,17 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+/* main font */
 @font-face {
-  font-family: AngelWish; /* doesn't render for some reason :( coolest font name.... */
-  src: url('/fonts/AngelWish.otf') format('opentype');
-}
-
-@font-face {
-  font-family: BlackFamily; /* doesn't work either.. */
-  src: url('/fonts/BlackFamily.ttf') format('truetype');
-  font-weight: 400;
+  font-family: 'EB Garamond';
   font-style: normal;
+  font-weight: 400;
   font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ebgaramond/v27/SlGDmQSNjdsmc35JDF1K5E55YMjF_7DPuGi-6_RkBI9_.woff2) format('woff2');
 }
 
 @font-face {
@@ -21,10 +17,33 @@
   font-weight: 100;
 }
 
+@font-face {
+  font-family: Lordish; /* bit overkill, very tall */
+  src: url('/fonts/Lordish.ttf') format('truetype');
+}
 
 @font-face {
-  font-family: Lordish; /* ok but could be better still, a bit too rounded */
-  src: url('/fonts/Lordish.ttf') format('truetype');
+  font-family: OldeEnglish; /* bit too hard to read certain letters */
+  src: url('/fonts/OldeEnglish.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: Bailenson; /* fancy handwriting font */
+  src: url('/fonts/Bailenson.otf') format('opentype');
+}
+
+@font-face {
+  font-family: SongsOfMoravia; /* very fancy handwriting font, bold */
+  src: url('/fonts/SongsOfMoravia.otf') format('opentype');
+}
+
+/* latin-ext */
+@font-face {
+  font-family: 'Ancientt';
+  font-style: normal;
+  font-weight: 400;
+  src: url('/fonts/Ancient.ttf') format('truetype');
+  unicode-range: U+30-39;
 }
 
 :root {
