@@ -7,10 +7,13 @@ import styles from './styles.module.css'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { useEffect } from 'react'
 import ClothingContextProvider, { useClothingContext } from '../../ClothingContext'
+import { getImagePath } from '../helperFunctions'
+import { ClothingCategory } from '../../types'
 
 export default function PageOverview(){
   const idParam = useSearchParams().get('id')
   const id = +(idParam ? idParam : -1)
+  const category = useClothingContext().clothes.find(item => item.id == id)?.category
 
   return <ClothingContextProvider>
     <FullWidthImage src="/images/layout/objects/cross.png" style={styles["cross"]} height={'200px'}/>
@@ -20,7 +23,7 @@ export default function PageOverview(){
       </div>
       <div className={styles["picture-frame"]}>
         <div className={styles["frame-background"]}/>
-          <FullWidthImage src={`/images/lolita/dresses/${id}.png`} style={styles["item-image"]} height={'300px'}/>
+          <FullWidthImage src={getImagePath(ClothingCategory[category as keyof typeof ClothingCategory], id)} style={styles["item-image"]} height={'300px'}/>
       </div>
     </div>
     <Link href={"/lolita/wardrobe"}>back to wardrobe</Link>
