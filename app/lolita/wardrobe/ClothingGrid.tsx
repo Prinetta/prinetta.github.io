@@ -3,19 +3,14 @@ import { getAllClothingItems } from "../../../database/database";
 import { Clothing, ClothingCategory } from "../types";
 import Image from 'next/image'
 import styles from './styles.module.css'
-import { Corinthia, Labrada } from "next/font/google";
+import { Labrada } from "next/font/google";
 import FullWidthImage from "../../components/FullWidthImage";
 import Link from "next/link";
 import React from "react";
 import { useClothingContext } from "../ClothingContext";
 import { getBrandName, getCategoryName, getImagePath } from "./helperFunctions";
 
-const brandFont = Corinthia({
-  weight: ['700'],
-  subsets: ['latin'],
-})
-
-const brandFont2 = Labrada({
+const brandFont = Labrada({
   weight: ['500'],
   style: ['italic'],
   subsets: ['latin'],
@@ -67,7 +62,7 @@ export default function ClothingGrid(){
           category={ClothingCategory[item.category as keyof typeof ClothingCategory]} 
           id={item.id}
           />        
-        <p className={[styles["clothing-brand"], brandFont2.className].join(" ")}>{getBrandName(item.brand)}</p>
+        <p className={[styles["clothing-brand"], brandFont.className].join(" ")}>{getBrandName(item.brand)}</p>
           {item.name.length < 29 ? (
             <h2 className={styles["clothing-name"]}>{item.name}</h2>      
           ) : (

@@ -1,0 +1,12 @@
+.nav-button {
+  background-color: white;
+  padding: 1%;
+  border-radius: 1%;
+  width: 30%;
+  align-self: center;
+  margin-bottom: 1%;
+}
+
+.nav-button:hover {
+  background-color: #F9DDEA;
+}

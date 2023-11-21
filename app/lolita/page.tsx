@@ -33,10 +33,10 @@ export default function FirstPost1() {
         this is why i absolutely love old moitie (THE egl/ega style) and atelier boz. in some ways the designs are so simple but something about it makes it so striking. 
         <br/><br/><br/>
 
-        <Link href="/lolita/wardrobe">my wardrobe</Link>
-        <a href="coords.html">pictures</a>
-        <a href="wishlist.html">wish list</a>
-        <a href="dressup.html">lolita dress up :3</a>
+        <Link href="/lolita/wardrobe" style={{color: 'hotpink', textDecoration: "black underline"}}>my wardrobe</Link><br/>
+        <a href="coords.html" style={{color: 'hotpink', textDecoration: "black underline"}}>pictures</a><br/>
+        <a href="wishlist.html" style={{color: 'hotpink', textDecoration: "black underline"}}>wish list</a><br/>
+        <a href="dressup.html" style={{color: 'hotpink', textDecoration: "black underline"}}>lolita dress up :3</a><br/>
         <br />
         <br />
         <Link href="/">home</Link>

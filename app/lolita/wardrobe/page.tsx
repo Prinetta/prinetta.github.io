@@ -60,7 +60,7 @@ export default function WardrobePage() {
     </div>
 }
 
-function WardrobeOverview({setIsFiltered}: {setIsFiltered: Dispatch<SetStateAction<boolean>>}){
+export function WardrobeOverview({setIsFiltered}: {setIsFiltered: Dispatch<SetStateAction<boolean>>}){
   return <div className='flex flex-row'>
     <WardrobeSidebar setIsFiltered={setIsFiltered}/>
     <ClothingGrid/>      

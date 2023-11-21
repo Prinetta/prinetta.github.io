@@ -1,0 +1,123 @@
+.game {
+  position: relative;
+
+}
+
+.character {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.character-screen {
+  width: 50%;
+  height: 100%;
+  border-color: black;
+  border-width: 2px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
+.selected-clothing {
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  left: 0;
+  right: 0;
+  text-align: center;
+}
+
+.jsk, .op {
+  top: 20%;
+}
+
+.blouse, .cutsew {
+  top: 19%;
+}
+
+.description {
+  color:  var(--light-pink);
+  font-weight: 600;
+  padding: 0% 13% 0% 45%;
+  text-align: left;
+  font-size: 18px;
+}
+
+.grid-container {
+  background-color: var(--light-pink);
+}
+
+.clothing-grid {
+  padding: 1%;
+  display: grid;
+  grid-template-columns: 30% 6% 30% 6% 30%;
+  align-items: center;
+  margin-right: 2%;
+}
+
+.clothing-card {
+  background-image: url(/images/layout/pattern/floral3.png); 
+  background-size: 200px;
+  background-repeat: repeat;
+  margin: 0.6em 0.6em; 
+  padding: 5%;
+  height: 17em;
+  min-width: 13em;
+}
+
+.clothing-card:hover {
+  box-shadow: inset 0 0 45px #FB67B3;
+  position: relative;
+  z-index: 1;
+}
+
+.clothing-card:hover:before {
+  content: url(/images/layout/objects/halo-s.png);
+  display: block;
+  width: 100%;
+  text-align: center; 
+  position: absolute;
+  left: -0.2%;
+  top: -7.5%;
+}
+
+.clothing-card:hover:after {
+  content: url(/images/layout/objects/wings-s.png);
+  display: block;
+  text-align: center; 
+  position: absolute;
+  top: 17.5%;
+  left: -1.5%;
+  z-index: -1;
+}
+
+.clothing-image {
+  display: block;
+  margin: auto; 
+  max-height: 13em;
+  min-height: 13em;
+  padding: 3%;
+}
+
+.clothing-brand {
+  white-space: break-spaces;
+  color: #B699A9;;  
+  text-align: center;
+  font-size: 18px;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px #F99BCE;
+  line-height: 95%;  
+}
+
+.clothing-name {
+  font-size: 23px;
+  font-weight: 600;
+}
+
+.clothing-name-small {
+  font-weight: 600;
+}
+
+.cross {
+  padding: 10px;
+}
